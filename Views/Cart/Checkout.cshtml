@@ -1,0 +1,74 @@
+@model CUT_Burger.Models.CheckoutViewModel
+
+<h2>Checkout</h2>
+
+<form asp-action="SubmitOrder" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input type="text" class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input type="text" class="form-control" asp-for="Address" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="City"></label>
+        <input type="text" class="form-control" asp-for="City" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="State"></label>
+        <input type="text" class="form-control" asp-for="State" />
+        <span asp-validation-for="State" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Zip"></label>
+        <input type="text" class="form-control" asp-for="Zip" />
+        <span asp-validation-for="Zip" class="text-danger"></span>
+    </div>
+
+    <h4>Your Cart Items:</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Burger</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Items) // Loop through cart items
+        {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Price.ToString("C")</td>
+            <td>@item.Quantity</td>
+            <td>@(item.Price * item.Quantity).ToString("C")</td>
+        </tr>
+        }
+        </tbody>
+    </table>
+
+    <h4>Total: @(Model.Items.Sum(i => i.Price * i.Quantity).ToString("C"))</h4>
+
+    <!-- Hidden field to pass the UserId -->
+    <input type="hidden" asp-for="UserId" />
+
+    <!-- Hidden field for PaymentMethod, if it's set elsewhere -->
+    <input type="hidden" asp-for="PaymentMethod" />
+
+    <button type="submit" class="btn btn-primary">Place Order</button>
+</form>
+
+@section Scripts {
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

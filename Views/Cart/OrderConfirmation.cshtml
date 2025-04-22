@@ -1,0 +1,47 @@
+@model CUT_Burger.Models.Order
+
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Order Confirmation</h2>
+
+    @if (Model != null)
+    {
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title">Order Details</h4>
+                <hr />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Order Number:</strong> <span class="text-primary">@Model.OrderNumber</span></p>
+                        <p><strong>Total Amount:</strong> <span class="text-success">@Model.TotalAmount.ToString("C")</span></p>
+                        <p><strong>Payment Method:</strong> @Model.PaymentMethod</p>
+                        <p><strong>Estimated Delivery Time:</strong> @Model.EstimatedDeliveryTime</p>
+                        <p><strong>Order Status:</strong> @Model.OrderStatus</p>
+                    </div>
+                </div>
+
+                <h5 class="mt-4">Delivery Information</h5>
+                <hr />
+                <p><strong>Name:</strong> @Model.UserName</p>
+                <p><strong>Address:</strong> @Model.UserAddress</p>
+                <p><strong>City:</strong> @Model.UserCity</p>
+                <p><strong>State:</strong> @Model.UserState</p>
+                <p><strong>Zip:</strong> @Model.UserZip</p>
+
+                <div class="mt-4 text-center">
+                    <a asp-action="Index" class="btn btn-primary">Buy More</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger mt-3" role="alert">
+            Order not found.
+        </div>
+    }
+</div>

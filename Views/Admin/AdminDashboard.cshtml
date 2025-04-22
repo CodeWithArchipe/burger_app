@@ -1,0 +1,74 @@
+@model List<User>
+
+@{
+ViewData["Title"] = "Admin Dashboard";
+bool isAdmin = ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - CUT_Burger</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Burger App Admin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Dashboard</a>
+            </li>
+            @if (isAdmin)
+            {
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("SeedDatabase", "Home")">Manage Database</a>
+            </li>
+            }
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("ViewOrders", "Admin")">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("ViewAllUsers", "Admin")">View All Users</a>
+            </li>
+            @* <li class="nav-item"> *@
+            @*     <a class="nav-link" href="#">Settings</a> *@
+            @* </li> *@
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2>Welcome to the Admin Dashboard</h2>
+    <p>Here, you can manage all the aspects of the Burger App, such as viewing orders, managing users, and more.</p>
+    @if (isAdmin)
+    {
+    <a href="@Url.Action("ViewAllUsers", "Admin")" class="btn btn-primary">View All Users</a>
+    }
+
+    <div class="card mt-4">
+        <div class="card-header">
+            Quick Actions
+        </div>
+        <div class="card-body">
+            <button class="btn btn-primary mb-2" onclick="location.href='@Url.Action("ViewOrders", "Admin")'">View Orders</button>
+            <button class="btn btn-secondary mb-2" onclick="location.href='@Url.Action("ManageUsers", "Admin")'">Manage Users</button>
+
+            @if (isAdmin)
+            {
+            <button class="btn btn-danger mb-2" onclick="location.href='@Url.Action("SeedDatabase", "Home")'">Manage Database</button>
+            }
+            @* <button class="btn btn-warning mb-2">Settings</button> *@
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

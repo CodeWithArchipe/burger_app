@@ -1,0 +1,41 @@
+@model CUT_Burger.Models.Cart
+
+<h2>Your Cart</h2>
+
+@if (Model.Items.Count == 0)
+{
+<p>Your cart is empty.</p>
+<a href="@Url.Action("UserDashboard", "User")" class="btn btn-primary">Return to Dashboard</a>
+}
+else
+{
+<table class="table">
+    <thead>
+    <tr>
+        <th>Burger</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Items)
+    {
+    <tr>
+        <td>@item.Name</td>
+        <td>@item.Price.ToString("C")</td>
+        <td>@item.Quantity</td>
+        <td>@(item.Price * item.Quantity).ToString("C")</td>
+        <td>
+            <a href="@Url.Action("RemoveFromCart", "Cart", new { id = item.Id })" class="btn btn-danger">Remove</a>
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>
+
+<h4>Total: @Model.TotalPrice.ToString("C")</h4>
+<a href="@Url.Action("Checkout", "Cart")" class="btn btn-primary">Checkout</a>
+<a href="@Url.Action("UserDashboard", "User")" class="btn btn-secondary">Add More Items</a>
+}

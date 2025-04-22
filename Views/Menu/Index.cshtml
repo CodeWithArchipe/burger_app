@@ -1,0 +1,42 @@
+@model List<CUT_Burger.Models.Burger> 
+
+@{
+    ViewData["Title"] = "Burger Menu";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CUT_Burger</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+<div class="container my-4">
+    <h1 class="mb-4">Burger Menu</h1>
+    
+    <div class="row">
+        @foreach (var item in Model)
+        {
+        <div class="col-md-4 burger-card">
+            <div class="card">
+                <img src="@Url.Content($"~/images/Burger{item.Id}.jpg")" class="card-img-top burger-image" alt="@item.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">@item.Description</p>
+                    <p class="card-text">@item.Price.ToString("C")</p>
+                    <a href="@Url.Action("AddToCart", "Cart", new { id = item.Id })" class="btn btn-primary">Add to Cart</a>
+                   
+                </div>
+            </div>
+        </div>
+        }
+
+    </div>
+</div>
+
+<script src="~/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+@using System.Security.Claims
+@model List<CUT_Burger.Models.Burger>
+@{
+ViewData["Title"] = "User Dashboard";
+System.Diagnostics.Debug.Assert(User.Identity != null, "User.Identity != null");
+var username = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Name)?.Value : "Guest";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .burger-image {
+            width: 100%;
+            height: auto;
+        }
+        .burger-card {
+            margin-bottom: 20px;
+        }
+        .dashboard-header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn-cart {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container my-4">
+    <div class="dashboard-header">
+        <h1 class="mb-4">Welcome, @username!</h1>
+        <a href="@Url.Action("Index", "Cart")" class="btn btn-secondary btn-lg btn-cart">View Cart</a>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">Profile</a>
+                <a href="#" class="list-group-item list-group-item-action">Settings</a>
+                <a href="#" class="list-group-item list-group-item-action">Notifications</a>
+                <a href="@Url.Action("Logout", "Account")" class="list-group-item list-group-item-action text-danger">Logout</a>
+            </div>
+        </div>
+
+        <!-- Main content area -->
+        <div class="col-md-9">
+            <!-- Recent Activity Section -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    Recent Activity
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Here you can view your recent activities.</p>
+                </div>
+            </div>
+
+            <!-- Menu Section -->
+            <h2 class="mb-4">Menu</h2>
+            <div class="row">
+                @{
+                string GetImageFileName(int index)
+                {
+                return $"Burger{index + 1}.jpg"; // Assuming index starts from 0
+                }
+                }
+
+                @foreach (var item in Model.Select((value, index) => new { value, index })) // Using Select for index
+                {
+                <div class="col-md-4 burger-card">
+                    <div class="card">
+                        <img src="@Url.Content($"~/images/{GetImageFileName(item.index)}")" class="card-img-top burger-image" alt="@item.value.Name">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.value.Name</h5>
+                            <p class="card-text">@item.value.Description</p>
+                            <p class="card-text">@item.value.Price.ToString("C")</p>
+                            <a href="@Url.Action("AddToCart", "Cart", new { id = item.value.Id })" class="btn btn-primary">Add to Cart</a>
+                            
+                        </div>
+                    </div>
+                </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

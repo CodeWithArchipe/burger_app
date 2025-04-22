@@ -1,0 +1,118 @@
+﻿@{
+ViewData["Title"] = "Home";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CUT_Burger</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+<div class="container-fluid p-0">
+    <!-- Hero Section -->
+    <div class="jumbotron jumbotron-fluid text-white bg-dark text-center" style="background-image: url('https://example.com/hero-burger.jpg'); background-size: cover;">
+        <div class="container py-5">
+            <h1 class="display-4">Welcome to CUT_Burger</h1>
+            <p class="lead">The best burgers in town, made just for you!</p>
+            <!-- Redirects to login page if not authenticated -->
+            <a href="@Url.Action("Login", "Account")" class="btn btn-primary btn-lg">Order Now</a>
+            <a href="@Url.Action("Index", "Cart")" class="btn btn-secondary btn-lg ms-3">View Cart</a>
+        </div>
+    </div>
+
+    <!-- Popular Items Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Popular Items</h2>
+        <div class="row">
+            <!-- Burger 1 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="images/Burger5.jpg" class="card-img-top" alt="Classic Burger"/>
+                    <div class="card-body">
+                        <h5 class="card-title">Classic Burger</h5>
+                        <p class="card-text">R50.00</p>
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-primary btn-lg">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Burger 2 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="images/Burger2.jpg" class="card-img-top" alt="Cheese Lover's Burger">
+                    <div class="card-body">
+                        <h5 class="card-title">Cheese Lover's Burger</h5>
+                        <p class="card-text">R40.00</p>
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-primary btn-lg">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Burger 3 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="images/Burger3.png" class="card-img-top" alt="BBQ Bacon Burger">
+                    <div class="card-body">
+                        <h5 class="card-title">BBQ Bacon Burger</h5>
+                        <p class="card-text">R40.00</p>
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-primary btn-lg">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Special Offers Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Special Offers</h2>
+        <div class="alert alert-success text-center">
+            Get 20% off on your first order! Use code <strong>WELCOME20</strong> at checkout.
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">What Our Customers Say</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0">"Best burgers I've ever had! The service is fantastic."</p>
+                            <footer class="blockquote-footer">John Doe</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0">"Great value for money and super tasty!"</p>
+                            <footer class="blockquote-footer">Jane Smith</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0">"I love the BBQ bacon burger. Can't get enough!"</p>
+                            <footer class="blockquote-footer">Mark Johnson</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+   
+</div>
+
+<script src="~/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
